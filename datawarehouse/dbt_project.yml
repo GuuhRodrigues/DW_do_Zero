@@ -1,0 +1,52 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'datawarehouse'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'datawarehouse'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+docs-paths: ["docs"]
+
+# Target-path: directory which will store compiled SQL files
+target-path: "target"
+
+# Clean-targets: directories to be removed by `dbt clean`
+clean-targets: ["target", "dbt_modules"]
+
+# The name of the schema used to store your models
+# For postgres, use the schema specified in profiles.yml
+models:
+  datawarehouse:
+    # Configurations for models in the staging folder
+    staging:
+      +schema: staging
+      +materialized: view
+
+      stg_commodities:
+        enabled: true
+
+      stg_movimentacao_commodities:
+        enabled: true
+      +docs:
+        node_color: "#c0c0c0"  # Cor prata
+
+    # Configurations for models in the datamart folder
+    datamart:
+      +schema: datamart
+      +materialized: view
+      +docs:
+        node_color: "#e6b530"  # Cor gold
+
+      dm_commodities:
+        enabled: true
