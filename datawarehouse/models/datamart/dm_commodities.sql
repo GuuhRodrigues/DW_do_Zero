@@ -56,13 +56,4 @@ filtered as (
         data = (select max_date from last_day)
 )
 
-select
-    data,
-    simbolo,
-    valor_fechamento,
-    acao,
-    quantidade,
-    valor,
-    ganho
-from
-    filtered
+select * from filtered
