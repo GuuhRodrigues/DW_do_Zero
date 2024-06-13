@@ -1,4 +1,4 @@
--- models/staging/stg_commodities.sql
+
 
 with source as (
     select
@@ -6,7 +6,7 @@ with source as (
         "Close",
         simbolo
     from 
-        {{ source('databasesales', 'commodities') }}
+        {{ source('dbsales_oklc', 'commodities') }}
 ),
 
 renamed as (
@@ -17,8 +17,4 @@ renamed as (
     from source
 )
 
-select
-    data,
-    valor_fechamento,
-    simbolo
-from renamed
+select * from renamed

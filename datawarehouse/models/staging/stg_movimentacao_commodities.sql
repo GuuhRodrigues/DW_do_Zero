@@ -1,4 +1,4 @@
--- models/staging/stg_movimentacao_commodities.sql
+
 
 with source as (
     select
@@ -7,7 +7,7 @@ with source as (
         action,
         quantity
     from 
-        {{ source('databasesales', 'movimentacao_commodities') }}
+        {{ source('dbsales_oklc', 'movimentacao_commodities') }}
 ),
 
 renamed as (
@@ -19,9 +19,4 @@ renamed as (
     from source
 )
 
-select
-    data,
-    simbolo,
-    acao,
-    quantidade
-from renamed
+select * from renamed
